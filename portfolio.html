@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harkishan Singh - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            position: relative;
+            overflow: hidden;
+        }
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header Animations */
+        .header-graphics {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        /* Floating Circles */
+        .header-graphics .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s infinite ease-in-out;
+        }
+        .header-graphics .circle:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        .header-graphics .circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+        .header-graphics .circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Rotating Triangles */
+        .header-graphics .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid rgba(255, 255, 255, 0.1);
+            animation: rotate 8s infinite linear;
+        }
+        .header-graphics .triangle:nth-child(4) {
+            top: 20%;
+            left: 80%;
+        }
+        .header-graphics .triangle:nth-child(5) {
+            top: 70%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Glowing Effect */
+        .header-graphics .glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+            animation: glow 4s infinite alternate ease-in-out;
+        }
+        .header-graphics .glow:nth-child(6) {
+            top: 30%;
+            left: 10%;
+        }
+        .header-graphics .glow:nth-child(7) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        @keyframes glow {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Moving Lines */
+        .header-graphics .line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: moveLine 5s infinite linear;
+        }
+        .header-graphics .line:nth-child(8) {
+            top: 40%;
+        }
+        .header-graphics .line:nth-child(9) {
+            top: 60%;
+            animation-delay: 2.5s;
+        }
+        @keyframes moveLine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Animated Candle */
+        .candle {
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 50px;
+            height: 150px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: inset 0 -20px 0 rgba(0, 0, 0, 0.1);
+        }
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ffcc00, #ff6600);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00;
+            animation: flicker 1.5s infinite alternate ease-in-out;
+        }
+        .candle::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ff6600, transparent);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.5;
+            animation: flicker 1s infinite alternate ease-in-out;
+        }
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateX(-50%) scale(0.9);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+<!-- Header Section -->
+<header class="h-screen flex items-center justify-center gradient-bg text-white relative overflow-hidden">
+    <!-- Header Graphics -->
+    <div class="header-graphics">
+        <!-- Floating Circles -->
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <!-- Rotating Triangles -->
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <!-- Glowing Effects -->
+        <div class="glow"></div>
+        <div class="glow"></div>
+        <!-- Moving Lines -->
+        <div class="line"></div>
+        <div class="line"></div>
+        <!-- Animated Candle -->
+        <div class="candle"></div>
+    </div>
+
+    <!-- Text Content -->
+    <div class="text-center z-10 relative px-4">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4">Harkishan Singh</h1>
+        <p class="text-xl md:text-2xl max-w-2xl mx-auto">Software Engineer at Amazon | Passionate about building scalable systems and solving complex problems.</p>
+        <div class="mt-8">
+            <a href="#contact" class="bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-100 transition duration-300 hover-scale">Contact Me</a>
+        </div>
+    </div>
+
+    <!-- Down Arrow Button (Visible only in header) -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+        <a href="#experience" class="text-white text-4xl hover:text-blue-200 transition duration-300">
+            <i class="fas fa-arrow-down"></i>
+        </a>
+    </div>
+</header>
+
+<!-- Rest of the code remains the same -->
+<!-- Experience Section -->
+<section id="experience" class="py-20 px-4 bg-white">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Experience</h2>
+    <div class="max-w-4xl mx-auto flex flex-col space-y-12 relative">
+        <!-- Vertical Timeline Line -->
+        <div class="absolute left-8 top-0 h-full w-1 bg-blue-500 hidden md:block" style="top: 2rem; height: calc(100% - 4rem);"></div>
+
+        <!-- Amazon Experience -->
+        <div class="flex items-start relative" data-aos="fade-right">
+            <!-- Rippling Bullet for Amazon -->
+            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-blue-500 rounded-full w-6 h-6 ripple-effect hidden md:block"></div>
+            <div class="pl-16 p-8 bg-gray-50 rounded-xl shadow-md hover-scale transition-transform duration-300 flex-1">
+                <h3 class="text-2xl font-semibold">Software Engineer - Amazon</h3>
+                <p class="mt-2 text-blue-500 font-medium">Jun '22 - Present</p>
+                <ul class="list-disc list-inside mt-4 text-gray-600">
+                    <li>Developed solutions to improve delivery estimates, saving $10.75M annually.</li>
+                    <li>Built a framework to detect weather-related delays, reducing costs by $5.7M.</li>
+                    <li>Developed 2 micro-services to re-architect a monolithic service.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SalesKen Experience -->
+        <div class="flex items-start relative" data-aos="fade-left">
+            <!-- Greyed Out Bullet for SalesKen -->
+            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-500 rounded-full w-6 h-6 hidden md:block"></div>
+            <div class="pl-16 p-8 bg-gray-50 rounded-xl shadow-md hover-scale transition-transform duration-300 flex-1">
+                <h3 class="text-2xl font-semibold">Software Engineer - SalesKen</h3>
+                <p class="mt-2 text-blue-500 font-medium">Mar '22 - May '22</p>
+                <ul class="list-disc list-inside mt-4 text-gray-600">
+                    <li>Integrated Zendesk Sell CRM with SalesKen.</li>
+                    <li>Developed a full-stack debugging tool using Spring Boot and JSP.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Xceedance Experience -->
+        <div class="flex items-start relative" data-aos="fade-right">
+            <!-- Greyed Out Bullet for Xceedance -->
+            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-500 rounded-full w-6 h-6 hidden md:block"></div>
+            <div class="pl-16 p-8 bg-gray-50 rounded-xl shadow-md hover-scale transition-transform duration-300 flex-1">
+                <h3 class="text-2xl font-semibold">Software Engineer - Xceedance</h3>
+                <p class="mt-2 text-blue-500 font-medium">Jun '21 - Apr '22</p>
+                <ul class="list-disc list-inside mt-4 text-gray-600">
+                    <li>Implemented JWT-based authentication for a .NET and Angular application.</li>
+                    <li>Reduced code redundancy by implementing an Angular interceptor.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="py-20 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Education</h2>
+    <div class="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="zoom-in">
+        <div class="flex items-center">
+            <img src="https://www.iiitd.ac.in/sites/default/files/images/logo/logo.jpg" alt="IIITD Logo" class="w-20 h-20 mr-6">
+            <div>
+                <h3 class="text-2xl font-semibold">B.Tech in Computer Science and Applied Mathematics</h3>
+                <p class="text-gray-600">Indraprastha Institute of Information Technology, Delhi (IIIT-D)</p>
+                <p class="text-gray-600">Aug '17 - Jun '21</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="py-20 px-4 bg-white">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Projects</h2>
+    <div class="max-w-4xl mx-auto">
+        <!-- Sketch Based Image Retrieval -->
+        <div class="mb-8 p-8 bg-gray-50 rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="fade-right">
+            <h3 class="text-2xl font-semibold">Sketch Based Image Retrieval</h3>
+            <p class="text-gray-600">Apr '20</p>
+            <ul class="list-disc list-inside mt-4 text-gray-600">
+                <li>Implemented Siamese Network with Densenet-121 for image retrieval task.</li>
+                <li>The model returns the most similar-looking image (in the database) to the sketch (input).</li>
+                <li>Tools & Tech: Keras, Tensorflow, Kaggle.</li>
+            </ul>
+        </div>
+        <!-- AI Plays Happy Birds -->
+        <div class="mb-8 p-8 bg-gray-50 rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="fade-left">
+            <h3 class="text-2xl font-semibold">AI Plays Happy Birds</h3>
+            <p class="text-gray-600">Nov '19</p>
+            <ul class="list-disc list-inside mt-4 text-gray-600">
+                <li>Implemented Reinforcement Learning (TD-learning) in the game of Flappy Birds.</li>
+                <li>The agent (bird) learns to dodge obstacles from its previous experiences/mistakes.</li>
+                <li>Tools & Tech: Pygame, Q-learning.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="py-20 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Skills</h2>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Cloud Technology Card -->
+        <div class="p-8 bg-white rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="zoom-in">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/AmazonWebservices_Logo.svg" alt="AWS Logo" class="w-16 h-16 mx-auto">
+            <h3 class="text-xl font-semibold text-center mt-4">Cloud Technology</h3>
+            <ul class="list-disc list-inside mt-4 text-gray-600">
+                <li>AWS: Lambda, ECS, EC2, DynamoDB, SQS, SNS, Athena, S3, Kinesis, CloudWatch</li>
+            </ul>
+        </div>
+        <!-- Languages Card -->
+        <div class="p-8 bg-white rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="Languages Logo" class="w-16 h-16 mx-auto">
+            <h3 class="text-xl font-semibold text-center mt-4">Languages</h3>
+            <ul class="list-disc list-inside mt-4 text-gray-600">
+                <li>Python, Java, JavaScript, C++, R, SQL</li>
+            </ul>
+        </div>
+        <!-- Frameworks Card -->
+        <div class="p-8 bg-white rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Frameworks Logo" class="w-16 h-16 mx-auto">
+            <h3 class="text-xl font-semibold text-center mt-4">Frameworks</h3>
+            <ul class="list-disc list-inside mt-4 text-gray-600">
+                <li>Spring Boot, Angular, .NET, React Native, Django, Bootstrap</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Me Section -->
+<section id="contact" class="py-20 px-4 bg-white">
+    <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Contact Me</h2>
+    
+    <div class="max-w-2xl mx-auto p-8 bg-gray-50 rounded-xl shadow-md hover-scale transition-transform duration-300" data-aos="zoom-in">
+        <p class="text-center text-gray-600 mb-6">Feel free to reach out for collaborations or opportunities!</p>
+
+        <!-- Contact Form -->
+        <form id="contact-form">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Name</label>
+                <input type="text" name="from_name" required class="w-full p-2 border rounded">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Email</label>
+                <input type="email" name="user_email" required class="w-full p-2 border rounded">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold">Message</label>
+                <textarea name="message" required class="w-full p-2 border rounded"></textarea>
+            </div>
+
+            <!-- Send Button (Transforms into Loader) -->
+            <button type="submit" id="send-button" class="bg-blue-600 text-white px-6 py-3 rounded w-full flex items-center justify-center transition-all duration-300">
+                <span id="button-text">Send Message</span>
+                <div id="loader-icon" class="hidden animate-spin h-6 w-6 border-4 border-white border-t-transparent rounded-full"></div>
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-blue-900 text-white text-center py-8">
+    <p>&copy; 2023 Harkishan Singh. All rights reserved.</p>
+</footer>
+
+<!-- AOS Initialization -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+<!-- EmailJS Integration -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    emailjs.init('3YaAEpv9YFqQXUgKR'); // Replace with your EmailJS Public Key
+
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Get elements
+        const sendButton = document.getElementById('send-button');
+        const buttonText = document.getElementById('button-text');
+        const loaderIcon = document.getElementById('loader-icon');
+
+        // Shrink button into loader
+        sendButton.classList.add("w-12", "h-12", "px-0", "py-0", "rounded-full");
+        sendButton.classList.remove("w-full", "py-3", "px-6");
+        buttonText.classList.add("hidden");
+        loaderIcon.classList.remove("hidden");
+
+        // Disable button
+        sendButton.disabled = true;
+
+        emailjs.sendForm('service_1y9rzhn', 'template_ig00ez2', this)
+            .then(function () {
+                alert('Message sent successfully!');
+
+                // Expand button back after success
+                sendButton.classList.remove("w-12", "h-12", "px-0", "py-0", "rounded-full");
+                sendButton.classList.add("w-full", "py-3", "px-6");
+                buttonText.classList.remove("hidden");
+                loaderIcon.classList.add("hidden");
+
+                sendButton.disabled = false;
+
+                // Reset the form
+                document.getElementById('contact-form').reset();
+            }, function (error) {
+                alert('Failed to send message. Please try again.');
+
+                // Expand button back after error
+                sendButton.classList.remove("w-12", "h-12", "px-0", "py-0", "rounded-full");
+                sendButton.classList.add("w-full", "py-3", "px-6");
+                buttonText.classList.remove("hidden");
+                loaderIcon.classList.add("hidden");
+
+                sendButton.disabled = false;
+            });
+    });
+</script>
+
+
+
+
+<!-- Smooth Scroll Script -->
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
